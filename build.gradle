@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    maven{
+        url 'https://repo.maven.apache.org/maven2'
+    }
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    //Libreria de karate
+    testImplementation 'com.intuit.karate:karate-junit5:1.2.0.RC4'
+    //Libreria de cucumber para generar reportes
+    implementation group: 'net.masterthought', name: 'cucumber-reporting', version: '5.7.5'
+    //libreria para ayudar con el reporte de cucumber
+    implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
+
+
+}
+
+test {
+    useJUnitPlatform()
+}
+
+sourceSets{
+
+    test{
+        resources {
+            // Le da la ruta donde estan los recurso a utilizar
+            srcDir file('src/test/java')
+
+            // Esto excluya los archivos . java porque no son recursos a utilizar
+            exclude '**/*.java'
+        }
+
+    }
+}
